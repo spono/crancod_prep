@@ -1,4 +1,4 @@
-# crancod_prep
+# CRANCOD - DATA PREPARATION
 Scripts for data preparation to comply with the [CRANCOD software](http://www.pommerening.org/wiki/index.php?title=CRANCOD_-_A_Program_for_the_Analysis_and_Reconstruction_of_Spatial_Forest_Structure).
 
 
