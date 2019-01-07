@@ -1,3 +1,16 @@
+#  ***************************************************************************
+#   CRANCOD_data_preparation.R
+#  ---------------------
+#   Date                 : January 2019
+#   Copyright            : (C) 2019 by Niccolò Marchi
+#   Email                : niccolo.marchi@phd.unipd.it
+#  ---------------------
+#   
+#  This script creates the four files necessary for a corret run of CRANCOD.
+#  Make sure to fill the excel file as required
+#  ***************************************************************************
+
+
 #### set variables ####
 
 # path to the CRANCOD data files
@@ -142,8 +155,9 @@ for (i in unique(dat$plot_num))
   ggplot(ss, aes(x=X, y=Y, size=DBH)) +
     #scale_shape_discrete(solid=FALSE) + # make simbols hollow
     geom_point(aes(shape=common_name,colour=common_name)) + # for a constant size, add here 'size=5' and remove above
-    coord_cartesian(xlim = c(-alim, alim),
-                    ylim = c(-alim, alim)) + # sets a fixed value range among the plots equal to the maximum radius
+    coord_fixed(ratio = 1)+
+    #coord_cartesian(xlim = c(-alim, alim),
+    #                ylim = c(-alim, alim)) + # sets a fixed value range among the plots equal to the maximum radius
     ggtitle(paste("Plot n.",i))+
     labs(x="", y="")+
     theme_bw()+
