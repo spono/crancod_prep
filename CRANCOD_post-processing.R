@@ -1,3 +1,15 @@
+#  ***************************************************************************
+#   CRANCOD_post-processing.R
+#  ---------------------
+#   Date                 : January 2019
+#   Copyright            : (C) 2019 by Niccolò Marchi
+#   Email                : niccolo.marchi@phd.unipd.it
+#  ---------------------
+#   
+#  This script converts the decimal format (from period to comma) through all 
+#  the outputs after running CRANCOD.
+#  ***************************************************************************
+
 #### set variables ####
 
 # path to the CRANCOD data files
