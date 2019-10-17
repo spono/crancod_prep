@@ -130,6 +130,7 @@ species <- readWorksheet(wb, sheet="species", header=FALSE)
 write.table(species, paste0(fname,".species"), sep="\t", row.names = FALSE, col.names = FALSE,
             dec = ".", quote=FALSE)
 
+colnames(species) = c("species","code", "common_name","latin_name","color")
 species = subset(species, select=c(species,latin_name))
 
 
@@ -155,17 +156,15 @@ for (i in unique(dat$plot_num))
   ggplot(ss, aes(x=X, y=Y, size=DBH)) +
     #scale_shape_discrete(solid=FALSE) + # make simbols hollow
     geom_point(aes(shape=common_name,colour=common_name)) + # for a constant size, add here 'size=5' and remove above
-    coord_fixed(ratio = 1)+
-    #coord_cartesian(xlim = c(-alim, alim),
-    #                ylim = c(-alim, alim)) + # sets a fixed value range among the plots equal to the maximum radius
+    coord_cartesian(xlim = c(-alim, alim),
+                    ylim = c(-alim, alim)) + # sets a fixed value range among the plots equal to the maximum radius
     ggtitle(paste("Plot n.",i))+
     labs(x="", y="")+
     theme_bw()+
     guides(size=FALSE)+ # remove the legend related to 'size'
     theme(plot.title = element_text(hjust = 0.5),
           legend.title = element_blank(),
-          legend.position = "bottom")+
-    coord_fixed(ratio=1/1)
+          legend.position = "bottom")
   
   ggsave(paste0("plot_",i,".png"), height = 5, width = 7)
 }
