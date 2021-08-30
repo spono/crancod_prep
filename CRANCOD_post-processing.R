@@ -22,7 +22,7 @@ fname = "test"
 
 require("NISTunits")
 require("ggplot2")
-require("XLConnect")# NB. install Java according to the R architecture you're using! (32 or 64 bit)
+#require("XLConnect")# NB. install Java according to the R architecture you're using! (32 or 64 bit)
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
@@ -37,6 +37,8 @@ setwd(wdir)
 fileList = list.files(wdir, pattern="\\.out$")
 
 
+out.list = list()
+
 for (i in 1:length(fileList))
 {
   setwd(wdir)
@@ -46,26 +48,11 @@ for (i in 1:length(fileList))
   {
     tbl[,j] = gsub(".", ",", tbl[,j], fixed = TRUE)
   }
-  setwd(file.path(wdir,"comma_dec"))
-  write.table(tbl, paste0(sheetName,".txt"), sep="\t", row.names = FALSE, col.names = FALSE, quote=FALSE)
+  #setwd(file.path(wdir,"comma_dec"))
+  #write.table(tbl, paste0(sheetName,".txt"), sep="\t", row.names = FALSE, col.names = FALSE, quote=FALSE)
+  out.list[[sheetName]] = fdata
 }
-setwd(wdir)
+#setwd(wdir)
 
+writexl::write_xlsx(out.list, path=file.path(out.folder, paste0('summary_stats_comma_dec.xlsx')) )
 
-#### output in Excel format (doesn't work perfectly...) ####
-
-# wb <- loadWorkbook(paste0(fname, "_output.xlsx"), create = TRUE)
-# 
-# for (i in 1:length(fileList))
-# {
-#   tbl = read.table(fileList[i], sep="\t", dec=".", fill=TRUE)
-#   sheetName = substr(fileList[i], nchar(fname)+2, nchar(fileList[i])-nchar("_org.out"))
-#   createSheet(wb, name = sheetName)
-#   for (j in 1:ncol(tbl))
-#   {
-#     tbl[,j] = gsub(".", ",", tbl[,j], fixed = TRUE)
-#   }
-#   setwd(file.path(wdir,"comma_dec"))
-#   writeWorksheet(wb, tbl, sheet = sheetName, header=FALSE)
-# }
-# saveWorkbook(wb)
